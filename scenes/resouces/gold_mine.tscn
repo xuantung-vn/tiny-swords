@@ -1,0 +1,114 @@
+[gd_scene load_steps=9 format=3 uid="uid://bjw15e5foelup"]
+
+[ext_resource type="Texture2D" uid="uid://dq04nsf1rxw4b" path="res://asstes/Terrain/Resources/Gold/Gold Stones/Gold Stone 6_Highlight.png" id="1_ea0so"]
+[ext_resource type="Texture2D" uid="uid://dbitdqh84dfv7" path="res://asstes/Terrain/Resources/Gold/Gold Stones/Gold Stone 5_Highlight.png" id="2_xir4d"]
+[ext_resource type="Texture2D" uid="uid://c3upcp2b11rff" path="res://asstes/Terrain/Resources/Gold/Gold Stones/Gold Stone 1_Highlight.png" id="3_utp68"]
+
+[sub_resource type="Animation" id="Animation_xir4d"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_utp68"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7mjqh"]
+_data = {
+&"RESET": SubResource("Animation_utp68"),
+&"idle": SubResource("Animation_xir4d")
+}
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mjqh"]
+texture = ExtResource("3_utp68")
+texture_region_size = Vector2i(128, 128)
+0:0/animation_speed = 5.0
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/animation_frame_4/duration = 1.0
+0:0/animation_frame_5/duration = 1.0
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_urch0"]
+sources/1 = SubResource("TileSetAtlasSource_7mjqh")
+
+[node name="GoldMine" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(86, 58)
+texture = ExtResource("1_ea0so")
+hframes = 6
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 35)
+texture = ExtResource("2_xir4d")
+hframes = 6
+frame = 3
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(146, 25)
+texture = ExtResource("2_xir4d")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+&"": SubResource("AnimationLibrary_7mjqh")
+}
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray(0, 0, 5, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 6, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+tile_set = SubResource("TileSet_urch0")
